@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="Inventory">
+    <head>
+        <title>Inventario - Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="assets/dependencies/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/dependencies/toastr.min.css">
+        <link rel="stylesheet" href="assets/style.css">
+        
+        <script src="js/dependencies/angular.min.js"></script>
+        <script src="js/dependencies/angular-route.min.js"></script>
+    </head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container" id="top-names">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/InventarioWeb/">Inicio</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    
+    <div class="container body-content">
+        
+           <h2>Acciones Disponibles</h2><br>
+       
+        <!-- Menu -->
+	<div class="container" ng-controller="HomeCtrl">
+            <div class="row">
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 sidebar">
+                        <ul class="nav nav-pills nav-stacked">
+                          <li ng-class="{active : isActive('/Products')}"><a href="#Products">Gestionar Productos</a></li>
+                          <li ng-class="{active : isActive('/Inventories')}"><a href="#Inventories">Gestionar Tipos de Invetario</a></li>
+                          <li ng-class="{active : isActive('/WareHouses')}"><a href="#WareHouses" >Gestionar Almacén</a></li>
+                          <li ng-class="{active : isActive('/Transactions')}"><a href="#Transactions" >Gestionar Transacciones</a></li>
+                          <li ng-class="{active : isActive('/About')}"><a href="#About" >Acerca De</a></li>
+                        </ul>
+                </div>
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 sidebar">
+                    <div class="tab-contest">
+                        <div ng-view></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <hr/>
+        <footer>
+
+            <div class="navbar navbar-inverse navbar-fixed-bottom">
+                <div class="container footer">
+                    <p>
+                        Sistema de Control de Inventario / Universidad Acción Pro-Educación
+                        y Cultura - 2016 &copy; Todos los derechos reservados.
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/dependencies/jquery-1.11.1.min.js"></script>
+    <script src="js/dependencies/toastr.min.js"></script>
+    <script src="js/dependencies/bootstrap.min.js"></script>
+    <script src="js/mainApp.js"></script>
+    
+    <script src="Services/inventoryService.js"></script>
+    <script src="Services/productService.js" ></script>
+    <script src="Services/wareHouseService.js"></script>
+    <script src="Services/transactionService.js"></script>
+    
+    <script src="controllers/Home.js"></script>
+    <script src="controllers/Product.js"></script>
+    <script src="controllers/Inventory.js"></script>
+    <script src="controllers/About.js"></script>
+    <script src="controllers/Transaction.js"></script>
+    <script src="controllers/WareHouse.js"></script>
+    
+</body>
+</html>

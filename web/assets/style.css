@@ -1,0 +1,104 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+} 
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+#top-names a:link, #top-names a:visited{
+    color:white;
+}
+
+.navbar-fixed-bottom{
+    background: linear-gradient(#1A1A1A, #000000); 
+}
+
+.footer{
+    margin-top: 15px;
+    color: white;
+}
+
+
+/*           */
+  #modal {
+    width: 300px;
+    height: 150px;
+    border: 1px solid #CCC;
+    box-shadow: 0 1px 5px #CCC;
+    border-radius: 5px;
+    font-family: verdana;
+    margin: 25px auto;
+    overflow: hidden;
+  }
+  #modal header {
+    background: #f1f1f1;
+    background-image: -webkit-linear-gradient( top, #f1f1f1, #CCC );
+    background-image: -ms-linear-gradient( top, #f1f1f1, #CCC );
+    background-image: -moz-linear-gradient( top, #f1f1f1, #CCC );
+    background-image: -o-linear-gradient( top, #f1f1f1, #CCC );
+    box-shadow: 0 1px 2px #888;
+    padding: 10px;
+  }
+  #modal h1 {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    font-weight: normal;
+    text-shadow: 0 1px 2px white;
+    color: #888;
+    text-align: center;
+  }
+  #modal section {
+    padding: 15px 10px 0px 30px; 
+    font-size: 12px;
+    line-height: 175%;
+    color: #333;
+  }
+/*                                   */
+
+#dropdownMenu1{
+    float: left;
+    margin: 0px 60px 0 40px;
+    min-width: 0;
+    width: auto
+}
+
+.searchPanel{
+    margin-top: 30px;
+}
+
+img{
+    height: 56px;
+    width: 56px;   
+    margin-left: 10px;
+    margin-right: 10px;
+}

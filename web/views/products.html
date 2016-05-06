@@ -1,0 +1,114 @@
+<div class="container tab-pane" id="lista">
+    
+     <h2>Gestión de Productos</h2>
+     <a data-toggle="modal" data-target='#modal-id' class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Añadir</a>
+     
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Codigo <input style="margin: 5px 0px" class="form-control" ng-model="search.id"/> </th>
+                <th>Descripción <input style="margin: 5px 0px" class="form-control" ng-model="search.description"/> </th>
+                <th>Existencia <input style="margin: 5px 0px" class="form-control" ng-model="search.stock"/> </th>
+                <th>Tipo de Inventario <input style="margin: 5px 0px" class="form-control" ng-model="search.typeInventory"/> </th>
+                <th>Costo Unitario <input style="margin: 5px 0px" class="form-control" ng-model="search.unitPrice"/></th>
+                <th>Estado <input style="margin: 5px 0px" class="form-control" ng-model="search.state"/></th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in products | filter:{id: search.id, description:search.description, stock: search.stock,  
+                                                             unitPrice: search.unitPrice, state: search.state, typeInventory: search.typeInventory}">
+                <td>{{ product.id }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.stock }}</td>
+                <td>{{ product.typeInventory.description }}</td>
+                <td>{{ product.unitPrice }}</td>
+                <td>{{ product.state == "1"? "Activo" : "Inactivo" }}</td>
+                <td class="text-center">
+                    <a ng-click="$parent.editProduct(product)" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></a>
+                    <a ng-click="$parent.deleteProduct(product)" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+<!--     Modal Windows Start -->
+    <div class="modal fade" id="modal-id">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Añadir un producto</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Productos</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" class="form-horizontal">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Código</label>
+                                    <div class="col-sm-10">
+                                        <input readonly type="text" placeholder="Código" class="form-control" ng-model="product.id">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Descripción</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" placeholder="Descripción" class="form-control" ng-model="product.description">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Existencia</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" placeholder="Existencia" class="form-control" ng-model="product.stock">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Tipo de Inventario</label>
+                                    <div class="col-sm-10">
+                                        <select ng-model="product.typeInventory.id" class="form-control">
+                                        <option ng-repeat="option in typesOfInventories" value="{{option.id}}">{{option.description}}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Costo Unitario</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" placeholder="Costo Unitario" class="form-control" ng-model="product.unitPrice">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Estado</label>
+                                    <div class="col-sm-10">
+                                        <select ng-model="product.state" class="form-control">
+                                        <option ng-repeat="option in states" value="{{option.id}}">{{option.description}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button ng-click="saveProduct()" type="button" class="btn btn-primary" data-dismiss="modal">Guardar Cambios</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->        
+
+</div>

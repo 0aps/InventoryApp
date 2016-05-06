@@ -1,0 +1,203 @@
+<div class="container tab-pane" id="listaT">
+    
+     <h2>Gestión de Transacción</h2>
+     <a data-toggle="modal" data-target='#modal-asiento' class="btn btn-success pull-right"><span class="glyphicon glyphicon-info" aria-hidden="true"></span>Asiento</a>
+     
+     <a data-toggle="modal" data-target='#modal-id' class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Añadir</a>
+     
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Tipo de Transacción</th>
+                <th>Id Artículo</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Monto</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="transaction in transactions">
+                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.type.description }}</td>
+                <td>{{ transaction.idArticle.description }}</td>
+                <td>{{ $parent.formatDate(transaction.date) }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.cost }}</td>
+                <td class="text-center">
+                    <a ng-click="$parent.editProduct(transaction)" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></a>
+                    <a ng-click="$parent.deleteProduct(transaction)" class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+<!--     Modal Windows Start -->
+    <div class="modal fade" id="modal-id">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Añadir una transacción</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Transacción</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" class="form-horizontal">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Código</label>
+                                    <div class="col-sm-10">
+                                        <input  readonly type="text" placeholder="Código" class="form-control" ng-model="transaction.id">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Tipo de Transacción</label>
+                                    <div class="col-sm-10">
+                                        <select ng-model="transaction.type.id" class="form-control">
+                                        <option ng-repeat="option in typesOfTransactions" value="{{option.id}}">{{option.description}}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Id Artículo</label>
+                                    <div class="col-sm-10">
+                                        <select ng-model="transaction.idArticle.id" class="form-control">
+                                        <option ng-repeat="option in articles" value="{{option.id}}">{{option.description}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Fecha</label>
+                                    <div class="col-sm-10">
+                                        <input id="datepicker" type="date" placeholder="Fecha" class="form-control" ng-model="transaction.date">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Cantidad</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" placeholder="Cantidad" class="form-control" ng-model="transaction.amount">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Monto</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" placeholder="Monto" class="form-control" ng-model="transaction.cost">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button ng-click="saveProduct()" type="button" class="btn btn-primary" data-dismiss="modal">Guardar Cambios</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->        
+
+
+<!--     Modal Windows Start -->
+    <div class="modal fade" id="modal-asiento">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Realizar Asiento</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Asiento Contable</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" class="form-horizontal">
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Código</label>
+                                    <div class="col-sm-8">
+                                        <input  readonly type="text" placeholder="Código" class="form-control" ng-model="asiento.id">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Descripción</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" placeholder="Descripción" class="form-control" ng-model="asiento.description">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Cuenta Contable</label>
+                                    <div class="col-sm-8">
+                                        <select ng-model="asiento.typeInventory.id" class="form-control">
+                                            <option ng-repeat="option in typesOfInventories" value="{{option.account    }}">{{option.account}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Tipo de Movimiento</label>
+                                    <div class="col-sm-8">
+                                        <select ng-model="asiento.typeMovement" class="form-control">
+                                          <option ng-repeat="option in typesOfMovement" value="{{option.id}}">{{option.description}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Fecha Asiento</label>
+                                    <div class="col-sm-8">
+                                        <input id="datepicker" type="date" placeholder="Fecha" class="form-control" ng-model="asiento.date">
+                                    </div>
+                                </div>
+                                
+                               
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Monto Asiento</label>
+                                    <div class="col-sm-8">
+                                        <input readonly type="text" placeholder="Monto" class="form-control" ng-value="getAccountAmount()" >
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Estado</label>
+                                    <div class="col-sm-8">
+                                        <select ng-model="asiento.state" class="form-control">
+                                        <option ng-repeat="option in states" value="{{option.id}}">{{option.description}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button ng-click="sendEntry()" type="button" class="btn btn-primary" data-dismiss="modal">Enviar Asiento</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->        
+
+    
+</div>
